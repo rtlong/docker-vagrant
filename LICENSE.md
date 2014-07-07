@@ -1,4 +1,4 @@
-The MIT License (MIT)
+# The MIT License (MIT)
 
 Copyright &copy; 2014 [Ryan T. Long](mailto:ryan@rtlong.com)
 
