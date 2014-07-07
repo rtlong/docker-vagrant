@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+Dir.chdir File.expand_path(File.realpath('../../', __FILE__))
+
+Process.exec 'vagrant', *ARGV
