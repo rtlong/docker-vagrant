@@ -1,6 +1,6 @@
 Vagrant.configure('2') do |vagrant|
   vagrant.vm.define 'goodguide-docker' do |config|
-    ip_address = '192.168.33.42'
+    ip_address = ENV.fetch('DOCKER_VAGRANT_IP', '192.168.33.42')
 
     config.vm.box = "phusion/ubuntu-14.04-amd64"
 
