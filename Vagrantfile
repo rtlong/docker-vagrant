@@ -14,18 +14,16 @@ Vagrant.configure('2') do |vagrant|
     # Disable the default /vagrant share, as it's not really applicable
     config.vm.synced_folder '.', '/vagrant', disabled: true
 
-    # config.vm.provider "virtualbox" do |vb|
-    #   # Use VBoxManage to customize the VM. For example to change memory:
-    #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-    # end
-
-    config.vm.provision :docker do |docker|
-      docker.pull_images 'busybox:latest'
-      docker.pull_images 'ubuntu:14.04'
+    config.vm.provider "virtualbox" do |vb|
+      # Use VBoxManage to customize the VM. For example to change memory:
+      vb.memory = 2048
+      vb.cpus = 4
     end
 
+    config.vm.provision :docker
+
     config.vm.provision :shell, privileged: true, inline: <<-SHELL
-      echo 'DOCKER_OPTS="${DOCKER_OPTS} -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375"' >> /etc/default/docker
+      echo 'DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375"' > /etc/default/docker
       service docker restart
     SHELL
 
