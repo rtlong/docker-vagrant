@@ -1,5 +1,18 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env bash
+#
+# This is a wrapper to properly execute Vagrant within the embedded
+# Vagrant installation directory. This sets up proper environmental variables
+# so that everything loads and compiles to proper directories.
 
-Dir.chdir File.expand_path(File.realpath('../../', __FILE__))
+# Get the directory where this script is. This will also resolve
+# any symlinks in the directory/script, so it will be the fully
+# resolved path.
+CURDIR="$(pwd)"
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  cd "$(dirname "$SOURCE")"
+  SOURCE="$(readlink "$SOURCE")"
+done
+cd -P "$( dirname "$SOURCE" )"
 
-Process.exec 'vagrant', *ARGV
+exec vagrant $@
