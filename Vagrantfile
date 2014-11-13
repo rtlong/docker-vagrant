@@ -9,14 +9,14 @@ Vagrant.configure('2') do |vagrant|
     # Mount your home directory in the VM at the same path, so absolute paths to
     # directories you want to add as mounted volumes are resolvable both inside
     # and outside the container.
-    config.vm.synced_folder ENV['HOME'], ENV['HOME']
+    config.vm.synced_folder ENV['HOME'], ENV['HOME'], type: 'nfs'
 
     # Disable the default /vagrant share, as it's not really applicable
     config.vm.synced_folder '.', '/vagrant', disabled: true
 
     config.vm.provider "virtualbox" do |vb|
       # Use VBoxManage to customize the VM. For example to change memory:
-      vb.memory = 2048
+      vb.memory = 3048
       vb.cpus = 4
     end
 
@@ -27,12 +27,17 @@ Vagrant.configure('2') do |vagrant|
       service docker restart
     SHELL
 
-    config.vm.post_up_message = <<-MSG.split("\n").map{|l| "  #{l.strip}" }.join("\n")
-      With the docker client installed on your host machine, you can now use
-      Docker as you'd expect, by simply telling it where to find the docker daemon:
+    config.vm.post_up_message = <<-MSG.split("\n").map{|l| "  #{l[6..-1]}" }.join("\n")
+      With the docker client installed on your host machine, you can now use Docker as
+      you'd expect, by simply telling it where to find the docker daemon:
 
-      $ export DOCKER_HOST='tcp://#{ip_address}:2375'
-      $ docker ps
+        $ export DOCKER_HOST='tcp://#{ip_address}:2375'
+        $ docker ps
+
+      Additionally, many GG tools/docs expect you to add an entry to /etc/hosts for
+      this VM. Add this line to your /etc/hosts file:
+
+        #{ip_address} docker.dev
     MSG
   end
 end
