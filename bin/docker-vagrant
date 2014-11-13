@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # This is a wrapper to properly execute Vagrant within the embedded
-# Vagrant installation directory. This sets up proper environmental variables
+# Vagrant installation directory. This sets up proper environment variables
 # so that everything loads and compiles to proper directories.
 
 # Get the directory where this script is. This will also resolve

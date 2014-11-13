@@ -1,10 +1,19 @@
+require 'pathname'
+
+configfile = Pathname.new(File.expand_path('../config.rb', __FILE__))
+if configfile.exist?
+  load configfile.path
+end
+
+$vm_cpu ||= 4
+$vm_ram ||= 3048
+$vm_ip ||= '192.168.33.42'
+
 Vagrant.configure('2') do |vagrant|
   vagrant.vm.define 'goodguide-docker' do |config|
-    ip_address = ENV.fetch('DOCKER_VAGRANT_IP', '192.168.33.42')
-
     config.vm.box = "phusion/ubuntu-14.04-amd64"
 
-    config.vm.network "private_network", ip: ip_address
+    config.vm.network "private_network", ip: $vm_ip
 
     # Mount your home directory in the VM at the same path, so absolute paths to
     # directories you want to add as mounted volumes are resolvable both inside
@@ -16,8 +25,8 @@ Vagrant.configure('2') do |vagrant|
 
     config.vm.provider "virtualbox" do |vb|
       # Use VBoxManage to customize the VM. For example to change memory:
-      vb.memory = 3048
-      vb.cpus = 4
+      vb.memory = $vm_ram
+      vb.cpus = $vm_cpu
     end
 
     config.vm.provision :docker
@@ -31,13 +40,13 @@ Vagrant.configure('2') do |vagrant|
       With the docker client installed on your host machine, you can now use Docker as
       you'd expect, by simply telling it where to find the docker daemon:
 
-        $ export DOCKER_HOST='tcp://#{ip_address}:2375'
+        $ export DOCKER_HOST='tcp://#{$vm_ip}:2375'
         $ docker ps
 
       Additionally, many GG tools/docs expect you to add an entry to /etc/hosts for
       this VM. Add this line to your /etc/hosts file:
 
-        #{ip_address} docker.dev
+        #{$vm_ip} docker.dev
     MSG
   end
 end
