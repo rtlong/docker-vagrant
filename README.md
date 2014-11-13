@@ -37,6 +37,7 @@ After Vagrant brings up the new VM, it will print some intructions which you'll 
     - Set the `DOCKER_HOST` environment variable; feel free to put this in your shell RC file for ease, or just export it when needed.
 - Optional, but highly recommended one-time step:
     - Define a `docker.dev` host in `/etc/hosts` pointing to the host-only-networking IP address of the VM
+        - Many GoodGuide docs/configfiles depend on this hostname.
 
 ## Known Issues
 
