@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x -e
+
 if [[ -z $prefix ]]; then
   prefix=$HOME/.local
 fi
