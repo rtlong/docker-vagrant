@@ -1,28 +1,37 @@
 #!/bin/bash
 
-set -x -e
+set -e
+
+fancy_echo() {
+  printf "\n%b\n" "$1"
+}
+
+e() {
+  fancy_echo "$*" >&2
+  $@
+}
 
 if [[ -z $prefix ]]; then
   prefix=$HOME/.local
 fi
 
-mkdir -p $prefix/opt $prefix/bin
+e mkdir -p $prefix/opt $prefix/bin
 
 dest=$prefix/opt/docker-vagrant
 if [ ! -d "$dest" ]; then
-  git clone 'https://github.com/GoodGuide/docker-vagrant.git' "$dest"
+  e git clone 'https://github.com/GoodGuide/docker-vagrant.git' "$dest"
 else
   (
     cd $dest
-    git fetch
-    git merge --ff-only origin/master
+    e git fetch
+    e git merge --ff-only origin/master
   )
 fi
 
 if [ -e $prefix/bin/docker-vagrant ]; then
   echo "Symlink already exists. Not overwriting"
 else
-  ln -vs $dest/bin/docker-vagrant $prefix/bin/docker-vagrant
+  e ln -vs $dest/bin/docker-vagrant $prefix/bin/docker-vagrant
 fi
 
 if ! (echo $PATH | grep -q $prefix/bin); then
