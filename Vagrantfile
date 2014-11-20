@@ -11,7 +11,7 @@ $vm_ip ||= '192.168.33.42'
 
 Vagrant.configure('2') do |vagrant|
   vagrant.vm.define 'goodguide-docker' do |config|
-    config.vm.box = "phusion/ubuntu-14.04-amd64"
+    config.vm.box = "docker-vagrant"
 
     config.vm.network "private_network", ip: $vm_ip
 
@@ -30,7 +30,6 @@ Vagrant.configure('2') do |vagrant|
     end
 
     config.vm.provision :docker
-
     config.vm.provision :shell, privileged: true, inline: <<-SHELL
       echo 'DOCKER_OPTS="-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375"' > /etc/default/docker
       service docker restart
