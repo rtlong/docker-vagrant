@@ -10,6 +10,12 @@ If supports Docker volume mounts from your host (OSX) filesystem into the Docker
 
 ## Installation
 
+```shell
+bash <(curl -fsSL https://raw.githubusercontent.com/GoodGuide/docker-vagrant/master/install.sh)
+```
+
+### Manual installation
+
 Clone the repo somewhere for safe keeping (`~/.local/opt/docker-vagrant` might make a good spot) and then install the file `bin/docker-vagrant` to your `$PATH` somewhere **using a symlink**.
 
 ```shell
