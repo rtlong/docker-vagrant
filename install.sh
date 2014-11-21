@@ -19,7 +19,7 @@ e mkdir -p $prefix/opt $prefix/bin
 
 dest=$prefix/opt/docker-vagrant
 if [ ! -d "$dest" ]; then
-  e git clone 'https://github.com/GoodGuide/docker-vagrant.git' "$dest"
+  e git clone 'https://github.com/rtlong/docker-vagrant.git' "$dest"
 else
   (
     cd $dest

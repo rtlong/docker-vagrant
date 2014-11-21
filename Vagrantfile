@@ -10,7 +10,7 @@ $vm_ram ||= 3048
 $vm_ip ||= '192.168.33.42'
 
 Vagrant.configure('2') do |vagrant|
-  vagrant.vm.define 'goodguide-docker' do |config|
+  vagrant.vm.define 'docker' do |config|
     config.vm.box = 'goodguide/docker-vagrant'
     config.vm.box_version = '>= 0.0.1'
 

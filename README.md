@@ -11,7 +11,7 @@ If supports Docker volume mounts from your host (OSX) filesystem into the Docker
 ## Installation
 
 ```shell
-bash <(curl -fsSL https://raw.githubusercontent.com/GoodGuide/docker-vagrant/master/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/rtlong/docker-vagrant/master/install.sh)
 ```
 
 ### Manual installation
@@ -23,7 +23,7 @@ prefix=$HOME/.local
 mkdir -p $prefix/opt $prefix/bin
 echo $PATH | grep -o $prefix/bin
 # if that returned nothing, add $prefix/bin to your PATH in your shell config (or choose a different prefix directory)
-git clone 'https://github.com/goodguide/docker-vagrant.git' $prefix/opt/docker-vagrant
+git clone 'https://github.com/rtlong/docker-vagrant.git' $prefix/opt/docker-vagrant
 ln -s $prefix/opt/docker-vagrant/bin/docker-vagrant $prefix/bin/docker-vagrant
 ```
 
@@ -43,7 +43,6 @@ After Vagrant brings up the new VM, it will print some intructions which you'll 
     - Set the `DOCKER_HOST` environment variable; feel free to put this in your shell RC file for ease, or just export it when needed.
 - Optional, but highly recommended one-time step:
     - Define a `docker.dev` host in `/etc/hosts` pointing to the host-only-networking IP address of the VM
-        - Many GoodGuide docs/configfiles depend on this hostname.
 
 ## Known Issues
 
