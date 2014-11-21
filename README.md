@@ -23,7 +23,7 @@ prefix=$HOME/.local
 mkdir -p $prefix/opt $prefix/bin
 echo $PATH | grep -o $prefix/bin
 # if that returned nothing, add $prefix/bin to your PATH in your shell config (or choose a different prefix directory)
-git clone 'https://github.com/rtlong/docker-vagrant.git' $prefix/opt/docker-vagrant
+git clone 'https://github.com/goodguide/docker-vagrant.git' $prefix/opt/docker-vagrant
 ln -s $prefix/opt/docker-vagrant/bin/docker-vagrant $prefix/bin/docker-vagrant
 ```
 
